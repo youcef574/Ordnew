@@ -77,9 +77,17 @@ class LanguageManager {
                 // Status
                 statusNew: 'Nouveau',
                 statusProcessing: 'En cours',
+                statusInProgress: 'En cours',
+                statusInPreparation: 'En préparation',
                 statusShipped: 'Expédié',
                 statusCompleted: 'Terminé',
-                statusCancelled: 'Annulé'
+                statusCancelled: 'Annulé',
+                statusReturned: 'Retour',
+                statusAwaitingExchange: 'En attente d\'échange',
+                statusExchangeShipped: 'Échange expédié',
+                statusExchangeCompleted: 'Échange terminé',
+                statusRefundInProgress: 'Remboursement en cours',
+                statusDisputeOpened: 'Litige ouvert'
             },
             en: {
                 // Header
