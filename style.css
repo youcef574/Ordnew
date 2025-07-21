@@ -707,100 +707,237 @@ body {
     background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.15) 100%);
 }
 
-/* Status Dropdown - Fixed and Improved */
-.status-dropdown {
+/* ELEGANT STATUS DROPDOWN - Enhanced Design */
+.elegant-status-dropdown {
     position: relative;
     display: inline-block;
     width: 100%;
     max-width: 130px;
+    z-index: 50;
 }
 
-.status-select {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
-    z-index: 2;
-    border: none;
-    background: transparent;
-}
-
-.status-display {
-    display: inline-flex;
+.elegant-status-current {
+    display: flex;
     align-items: center;
-    gap: var(--spacing-xs);
-    padding: 0.5rem 0.75rem;
-    border-radius: 20px;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 16px;
     font-size: 0.75rem;
-    font-weight: 500;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     cursor: pointer;
-    transition: var(--transition-fast);
-    border: 1px solid transparent;
-    min-width: 110px;
-    justify-content: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    background: var(--bg-white);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     position: relative;
-    z-index: 1;
+    overflow: hidden;
+    min-height: 42px;
+    justify-content: space-between;
 }
 
-.status-display:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+.elegant-status-current:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border-color: var(--purple-light);
 }
 
-.status-dropdown.open .status-display {
+.elegant-status-current::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--purple), var(--royal-blue), var(--purple-light));
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: subtract;
+    -webkit-mask-composite: destination-out;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.elegant-status-dropdown.open .elegant-status-current::before {
+    opacity: 1;
+}
+
+.dropdown-arrow {
+    font-size: 0.625rem;
+    color: var(--purple);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-left: auto;
+}
+
+.elegant-status-dropdown.open .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* Status Colors */
+.elegant-status-current.new {
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    color: #065f46;
+    border-color: #10b981;
+}
+
+.elegant-status-current.inProgress {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    color: #92400e;
+    border-color: #f59e0b;
+}
+
+.elegant-status-current.inPreparation {
+    background: linear-gradient(135deg, #f0f9ff 0%, #dbeafe 100%);
+    color: #1e3a8a;
+    border-color: #3b82f6;
+}
+
+.elegant-status-current.shipped {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    color: #1e40af;
+    border-color: var(--royal-blue);
+}
+
+.elegant-status-current.completed {
+    background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+    color: #6b21a8;
     border-color: var(--purple);
-    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
 }
 
-.status-display.new {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+.elegant-status-current.cancelled {
+    background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+    color: #991b1b;
+    border-color: #ef4444;
+}
+
+.elegant-status-current.returned {
+    background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+    color: #374151;
+    border-color: #6b7280;
+}
+
+.elegant-status-current.awaitingExchange {
+    background: linear-gradient(135deg, #fef7ff 0%, #fae8ff 100%);
+    color: #86198f;
+    border-color: #c084fc;
+}
+
+.elegant-status-current.exchangeShipped {
+    background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+    color: #134e4a;
+    border-color: #14b8a6;
+}
+
+.elegant-status-current.exchangeCompleted {
+    background: linear-gradient(135deg, #f7fee7 0%, #ecfccb 100%);
+    color: #365314;
+    border-color: #84cc16;
+}
+
+.elegant-status-current.refundInProgress {
+    background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+    color: #713f12;
+    border-color: #eab308;
+}
+
+.elegant-status-current.disputeOpened {
+    background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+    color: #881337;
+    border-color: #f43f5e;
+}
+
+/* Options Dropdown */
+.elegant-status-options {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: var(--bg-white);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    max-height: 320px;
+    overflow-y: auto;
+}
+
+.elegant-status-dropdown.open .elegant-status-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.elegant-status-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-black);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.elegant-status-option:last-child {
+    border-bottom: none;
+    border-radius: 0 0 16px 16px;
+}
+
+.elegant-status-option:first-child {
+    border-radius: 16px 16px 0 0;
+}
+
+.elegant-status-option:hover {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(65, 105, 225, 0.05) 100%);
+    color: var(--purple-dark);
+    transform: translateX(4px);
+}
+
+.elegant-status-option.selected {
+    background: linear-gradient(135deg, var(--purple) 0%, var(--royal-blue) 100%);
     color: white;
+    font-weight: 600;
 }
 
-.status-display.new:hover {
-    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+.elegant-status-option.selected:hover {
+    background: linear-gradient(135deg, var(--purple-dark) 0%, #3654d1 100%);
+    transform: translateX(0);
 }
 
-.status-display.processing {
-    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-    color: white;
+.elegant-status-option i {
+    font-size: 0.875rem;
+    width: 16px;
+    text-align: center;
 }
 
-.status-display.processing:hover {
-    background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+/* Scrollbar for options */
+.elegant-status-options::-webkit-scrollbar {
+    width: 4px;
 }
 
-.status-display.shipped {
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-    color: white;
+.elegant-status-options::-webkit-scrollbar-track {
+    background: transparent;
 }
 
-.status-display.shipped:hover {
-    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+.elegant-status-options::-webkit-scrollbar-thumb {
+    background: var(--purple-light);
+    border-radius: 2px;
 }
 
-.status-display.completed {
-    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-    color: white;
-}
-
-.status-display.completed:hover {
-    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
-}
-
-.status-display.cancelled {
-    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-    color: white;
-}
-
-.status-display.cancelled:hover {
-    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+.elegant-status-options::-webkit-scrollbar-thumb:hover {
+    background: var(--purple);
 }
 
 /* Action Buttons */
@@ -831,7 +968,7 @@ body {
     font-size: 0.875rem;
 }
 
-/* Modal Styles - Fixed and Improved */
+/* Modal Styles */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -916,7 +1053,7 @@ body {
     transform: scale(1.05);
 }
 
-/* Invoice Fields - Fixed */
+/* Invoice Fields */
 .modal-body {
     padding: 0;
 }
@@ -1100,7 +1237,7 @@ body {
     transform: translateY(-1px);
 }
 
-/* WhatsApp Notification Modal - NEW ADDITION */
+/* WhatsApp Notification Modal */
 .whatsapp-modal {
     background: var(--bg-white);
     border-radius: 16px;
@@ -1248,6 +1385,20 @@ body {
         display: none;
     }
     
+    .elegant-status-dropdown {
+        max-width: 110px;
+    }
+    
+    .elegant-status-current {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.7rem;
+    }
+    
+    .elegant-status-option {
+        padding: 0.75rem 0.8rem;
+        font-size: 0.75rem;
+    }
+    
     .toolbar {
         flex-direction: column;
         gap: var(--spacing-md);
@@ -1374,10 +1525,6 @@ body {
         min-width: 1200px;
     }
     
-    .customer-details {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
     .invoice-modal {
         max-width: 520px;
     }
@@ -1479,17 +1626,8 @@ body {
         width: 100% !important;
     }
     
-    .professional-invoice {
-        padding: 0 !important;
-    }
-    
     body {
         background: white !important;
-        color: black !important;
-    }
-    
-    .company-branding,
-    .invoice-title {
         color: black !important;
     }
     
